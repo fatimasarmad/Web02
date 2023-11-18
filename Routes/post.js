@@ -147,6 +147,16 @@ router.get('/list', async (req, res) => {
         res.status(500).json({ error: 'Internal server error', details: err.message });
     }
 });
+
+router.get('/', async (req, res) => {
+    try {
+        const posts = await Post.find();
+        res.json({ error: null, data: posts });
+    } catch (error) {
+        res.status(400).json({ error });
+    }
+});
+
 router.get('/get/:postId', async (req, res) => {
     try {
         const postId = req.params.postId;
